@@ -11,7 +11,6 @@ namespace task05
         static void Main(string[] args)
         {
             var x = CountExp(2, 3) + CountExp(5, 7) + CountExp(4, 6);
-
             Console.WriteLine ($"x = {x:F3}");
 
             Console.ReadKey();
