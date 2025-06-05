@@ -11,11 +11,12 @@ namespace PerfomanceApp
     {
         static void Main(string[] args)
         {
-            var hamlet = new TheaterPerfomance(
+            var hamlet = new Drama(
                 "Гамлет",
                 new TimeSpan(2, 30, 0),
                 new DateTime(2025, 3, 5, 19, 0, 0),
-                PerfomanceType.Premiere
+                PerfomanceType.Premiere,
+                "Уильям Шекспир"
             );
 
             hamlet.Coefficient = 0.25;

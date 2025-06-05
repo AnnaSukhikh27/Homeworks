@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace Perfomance
 {
 
-    public class TheaterPerfomance
+    public abstract class TheaterPerfomance
     {
         public string Name { get; set; }
         public TimeSpan Duration { get; set; }
@@ -45,6 +46,90 @@ namespace Perfomance
             info[3] = $"Тип: {type}, Скидка/Увеличение цены: {Coefficient}";
             return info;
         }
+        public abstract string GetAuthors();
+    }
+    
+
+    public class Opera : TheaterPerfomance 
+    {
+        public string Composer {  get; set; }
+        public string LibrettoAuthor {  get; set; }
+        public Opera(string name, TimeSpan duration, DateTime beginning, PerfomanceType type, string composer, string librettoAuthor)
+            : base (name, duration, beginning, type) 
+        {
+            Composer = composer;
+            LibrettoAuthor = librettoAuthor;
+        }
+
+        public override string GetAuthors() =>
+            $"Композитор: {Composer}, автор/ы либретто: {LibrettoAuthor}";
+        public override string[] GetInfo()
+        {
+            var info = new string[5];
+            var playInfo = base.GetInfo();
+
+            info[0] = playInfo[0];
+            info[1] = playInfo[1]; 
+            info[2] = playInfo[2];
+            info[3] = playInfo[3];
+            info[4] = GetAuthors();
+
+            return info;
+        }
+
+    }
+
+    public class Ballet : TheaterPerfomance
+    {
+        public string Composer { get; set; }
+        public string Choreographer { get; set; }
+        public Ballet(string name, TimeSpan duration, DateTime beginning, PerfomanceType type, string composer, string choreographer)
+            : base(name, duration, beginning, type) 
+        {
+            Composer = composer;
+            Choreographer = choreographer;
+        }
+        public override string GetAuthors() =>
+           $"Композитор: {Composer}, хореограф: {Choreographer}";
+        public override string[] GetInfo()
+        {
+            var info = new string[5];
+            var playInfo = base.GetInfo();
+
+            info[0] = playInfo[0];
+            info[1] = playInfo[1];
+            info[2] = playInfo[2];
+            info[3] = playInfo[3];
+            info[4] = GetAuthors();
+
+            return info;
+        }
+
+    }
+    public class Drama: TheaterPerfomance
+    {
+        public string PlayAuthor { get; set; }
+        public Drama(string name, TimeSpan duration, DateTime beginning, PerfomanceType type, string playAuthor)
+            : base(name, duration, beginning, type) 
+        {
+            PlayAuthor = playAuthor;
+        }
+        public override string GetAuthors() =>
+           $"Автор пьесы: {PlayAuthor}";
+        public override string[] GetInfo()
+        {
+            var info = new string[5];
+            var playInfo = base.GetInfo();
+
+            info[0] = playInfo[0];
+            info[1] = playInfo[1];
+            info[2] = playInfo[2];
+            info[3] = playInfo[3];
+            info[4] = GetAuthors();
+
+            return info;
+        }
+
     }
 
 }
