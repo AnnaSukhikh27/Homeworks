@@ -1,6 +1,64 @@
 namespace Perfomance.UnitTests
 {
     [TestFixture]
+    public class TheaterPerfomanceTests 
+    {
+        [Test]
+        public void CompareToTest() 
+        {
+            var shelkunchik = new Ballet("Щелкунчик", new TimeSpan(2, 30, 0), new DateTime(2025, 10, 11, 18, 0, 0), PerfomanceType.LastSeason, "Пётр Чайковский", "Мариус Петипа");
+            var zhizel = new Ballet("Жизель", new TimeSpan(2, 0, 0), new DateTime(2025, 10, 11, 20, 40, 0), PerfomanceType.Premiere, "Адольф Адан", "Жан Коралли");
+            var don = new Opera("Дон Жуан", new TimeSpan(1, 30, 0), new DateTime(2026, 12, 12, 18, 0, 0), PerfomanceType.Regular, "Вольфганг Амадей Моцарт", "Лоренцо да Понте");
+            var sad = new Drama("Вишневый сад", new TimeSpan(2, 50, 0), new DateTime(2025, 9, 10, 18, 0, 0), PerfomanceType.Premiere, "Антон Чехов");
+            var dno = new Drama("На дне", new TimeSpan(2, 0, 0), new DateTime(2025, 10, 11, 18, 0, 0), PerfomanceType.Premiere, "Максим Горький");
+
+            Assert.That(shelkunchik.CompareTo(zhizel), Is.LessThan(0));
+            Assert.That(shelkunchik.CompareTo(dno), Is.EqualTo(0));
+            Assert.That(don.CompareTo(sad), Is.GreaterThan(0));
+            Assert.That(dno.CompareTo(sad), Is.GreaterThan(0));
+            Assert.That(zhizel.CompareTo(don), Is.LessThan(0));
+        }
+    }
+
+    public class RepertoireTests 
+    {
+        Repertoire repertoire;
+        TheaterPerfomance[] perfomancesInTheater;
+
+        [SetUp]
+        public void Setup() 
+        {
+            var shelkunchik = new Ballet("Щелкунчик", new TimeSpan(2, 30, 0), new DateTime(2025, 10, 11, 18, 0, 0), PerfomanceType.LastSeason, "Пётр Чайковский", "Мариус Петипа");
+            var zhizel = new Ballet("Жизель", new TimeSpan(2, 0, 0), new DateTime(2025, 10, 11, 20, 40, 0), PerfomanceType.Premiere, "Адольф Адан", "Жан Коралли");
+            var dno = new Drama("На дне", new TimeSpan(2, 0, 0), new DateTime(2025, 10, 11, 18, 0, 0), PerfomanceType.Premiere, "Максим Горький");
+            
+            perfomancesInTheater = new TheaterPerfomance[] {shelkunchik, zhizel, dno};
+            repertoire = new Repertoire(Month.Октябрь, 2025, perfomancesInTheater);
+        }
+        [Test]
+        public void ConstructorTest() 
+        {
+            Assert.That(repertoire.Month, Is.EqualTo(Month.Октябрь));
+            Assert.That(repertoire.Year, Is.EqualTo(2025));
+
+            foreach (var perfomance in perfomancesInTheater)
+                Assert.That(repertoire.Perfomances.Contains(perfomance) && repertoire.Perfomances.IndexOf(perfomance) == repertoire.Perfomances.LastIndexOf(perfomance), Is.True);
+        }
+
+        [Test]
+        public void CountTest()
+        {
+            Assert.That(repertoire.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void IEnumerableTest()
+        {
+            var i = 0;
+            foreach (var perfomance in repertoire)
+                Assert.That(perfomance, Is.SameAs(perfomancesInTheater[i++]));
+        }
+    }
     public class PerfomanceDramaUnitTests
     {
         [Test]
@@ -29,7 +87,7 @@ namespace Perfomance.UnitTests
             Assert.That($"Тип: обычный, Скидка/Увеличение цены: 0", Is.EqualTo(info[3]));
             Assert.That(info[4], Is.EqualTo("Автор пьесы: Уильям Шекспир"));
 
-            
+
         }
 
         [Test]
@@ -138,7 +196,6 @@ namespace Perfomance.UnitTests
                 "Вацлав Резингер");
         }
     }
-
 
 
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace Perfomance
 {
 
-    public abstract class TheaterPerfomance
+    public abstract class TheaterPerfomance : IComparable<TheaterPerfomance>
     {
         public string Name { get; set; }
         public TimeSpan Duration { get; set; }
@@ -24,8 +25,6 @@ namespace Perfomance
             Duration = duration;
             Beginning = beginning;
             Type = type;
-
-       
         }
 
         public virtual string[] GetInfo()
@@ -47,9 +46,42 @@ namespace Perfomance
             return info;
         }
         public abstract string GetAuthors();
+
+        public int CompareTo(TheaterPerfomance other) 
+        {
+            return Beginning.CompareTo(other.Beginning);
+        }
     }
     
+    public enum Month 
+    {
+        Январь = 1, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь
+    }
 
+    public class Repertoire : IEnumerable<TheaterPerfomance> 
+    {
+        public Month Month { get; }
+        public int Year { get; }
+        List<TheaterPerfomance> perfomances;
+        public int Count => perfomances.Count;
+        public List<TheaterPerfomance> Perfomances => perfomances;
+
+        public Repertoire(Month month, int year, IEnumerable<TheaterPerfomance> inputPerfomances) 
+        {
+            Month = month;
+            Year = year;
+            perfomances = new List<TheaterPerfomance>();
+            foreach (var perf in inputPerfomances)
+            {
+                if (perf.Beginning.Month == (int)month && perf.Beginning.Year == year && !perfomances.Contains(perf))
+                {
+                    perfomances.Add(perf);
+                }
+            }
+        }
+        public IEnumerator<TheaterPerfomance> GetEnumerator() => perfomances.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
     public class Opera : TheaterPerfomance 
     {
         public string Composer {  get; set; }
