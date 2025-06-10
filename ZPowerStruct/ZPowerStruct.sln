@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZPowerStruct", "ZPowerStruct\ZPowerStruct.csproj", "{16010D04-13B5-42F9-AD0A-9B7AE764A280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZPower.UnitTests", "ZPower.UnitTests\ZPower.UnitTests.csproj", "{25E8FA75-EFE0-44CA-9E17-42E2D53F650D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16010D04-13B5-42F9-AD0A-9B7AE764A280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16010D04-13B5-42F9-AD0A-9B7AE764A280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16010D04-13B5-42F9-AD0A-9B7AE764A280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16010D04-13B5-42F9-AD0A-9B7AE764A280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E8FA75-EFE0-44CA-9E17-42E2D53F650D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25E8FA75-EFE0-44CA-9E17-42E2D53F650D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E8FA75-EFE0-44CA-9E17-42E2D53F650D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25E8FA75-EFE0-44CA-9E17-42E2D53F650D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEB40D8C-4968-4385-B26E-56CC1EAAD973}
+	EndGlobalSection
+EndGlobal
